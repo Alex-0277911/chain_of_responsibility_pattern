@@ -1,0 +1,48 @@
+@startuml
+set namespaceSeparator ::
+
+abstract class "chain_of_responsibility_pattern::chain_of_responsibility_pattern.dart::BookingHandler" {
+  -BookingHandler _nextHandler
+  +BookingHandler nextHandler
+  +void processBooking()
+}
+
+"chain_of_responsibility_pattern::chain_of_responsibility_pattern.dart::BookingHandler" o-- "chain_of_responsibility_pattern::chain_of_responsibility_pattern.dart::BookingHandler"
+
+class "chain_of_responsibility_pattern::chain_of_responsibility_pattern.dart::FlightBookingHandler" {
+  +void processBooking()
+}
+
+"chain_of_responsibility_pattern::chain_of_responsibility_pattern.dart::BookingHandler" <|-- "chain_of_responsibility_pattern::chain_of_responsibility_pattern.dart::FlightBookingHandler"
+
+class "chain_of_responsibility_pattern::chain_of_responsibility_pattern.dart::HotelBookingHandler" {
+  +void processBooking()
+}
+
+"chain_of_responsibility_pattern::chain_of_responsibility_pattern.dart::BookingHandler" <|-- "chain_of_responsibility_pattern::chain_of_responsibility_pattern.dart::HotelBookingHandler"
+
+class "chain_of_responsibility_pattern::chain_of_responsibility_pattern.dart::CarRentalBookingHandler" {
+  +void processBooking()
+}
+
+"chain_of_responsibility_pattern::chain_of_responsibility_pattern.dart::BookingHandler" <|-- "chain_of_responsibility_pattern::chain_of_responsibility_pattern.dart::CarRentalBookingHandler"
+
+class "chain_of_responsibility_pattern::chain_of_responsibility_pattern.dart::Booking" {
+  +BookingType bookingType
+}
+
+"chain_of_responsibility_pattern::chain_of_responsibility_pattern.dart::Booking" o-- "chain_of_responsibility_pattern::chain_of_responsibility_pattern.dart::BookingType"
+
+class "chain_of_responsibility_pattern::chain_of_responsibility_pattern.dart::BookingType" {
+  +int index
+  {static} +List<BookingType> values
+  {static} +BookingType flight
+  {static} +BookingType hotel
+  {static} +BookingType carRental
+}
+
+"chain_of_responsibility_pattern::chain_of_responsibility_pattern.dart::BookingType" o-- "chain_of_responsibility_pattern::chain_of_responsibility_pattern.dart::BookingType"
+"dart::core::Enum" <|-- "chain_of_responsibility_pattern::chain_of_responsibility_pattern.dart::BookingType"
+
+
+@enduml
