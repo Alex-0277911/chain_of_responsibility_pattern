@@ -80,6 +80,7 @@ void main() {
 // наступний обробник у ланцюжку
   flightBookingHandler.nextHandler = hotelBookingHandler;
   hotelBookingHandler.nextHandler = carRentalBookingHandler;
+  carRentalBookingHandler.nextHandler = flightBookingHandler;
 
   flightBookingHandler.processBooking(Booking(BookingType
       .flight)); // Output: Flight booking handled by FlightBookingHandler
@@ -89,5 +90,12 @@ void main() {
       .carRental)); // Output: Car rental booking handled by CarRentalBookingHandler
 
   //
-  flightBookingHandler.processBooking(Booking(BookingType.carRental));
+  carRentalBookingHandler.processBooking(Booking(BookingType.flight));
+  carRentalBookingHandler.processBooking(Booking(BookingType.hotel));
+  carRentalBookingHandler.processBooking(Booking(BookingType.carRental));
+
+  //
+  hotelBookingHandler.processBooking(Booking(BookingType.carRental));
+  hotelBookingHandler.processBooking(Booking(BookingType.flight));
+  hotelBookingHandler.processBooking(Booking(BookingType.hotel));
 }
